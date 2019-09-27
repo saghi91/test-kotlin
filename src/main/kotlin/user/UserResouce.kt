@@ -1,7 +1,7 @@
 package user
 
 import CassandraConnector
-import repositories.UserRepository
+import com.google.inject.Inject
 import java.time.Instant
 import java.util.*
 import javax.ws.rs.GET
@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType
 import kotlin.collections.HashMap
 
 @Path("users")
-class UserResouce {
+class UserResouce @Inject constructor(val service: UserService) {
     private val users = HashMap<String, User>()
 
     init {
@@ -25,7 +25,7 @@ class UserResouce {
         val dbUtils = CassandraConnector()
         val session = dbUtils.connect()
 
-       return UserRepository(session).findAll()
+       return service.getAll()
     }
 
 //    @Produces(MediaType.APPLICATION_JSON)

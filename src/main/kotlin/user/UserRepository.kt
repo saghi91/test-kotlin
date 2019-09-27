@@ -1,11 +1,10 @@
-package repositories
+package user
 
 import com.datastax.oss.driver.api.core.CqlSession
 import com.datastax.oss.driver.api.core.cql.ResultSet
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder.literal
 import com.datastax.oss.driver.api.querybuilder.insert.RegularInsert
-import user.User
 import java.util.stream.Collectors
 
 

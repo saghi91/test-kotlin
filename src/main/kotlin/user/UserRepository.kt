@@ -9,7 +9,7 @@ import dbUtils.DBConnector
 import java.util.stream.Collectors
 
 
-class UserRepository @Inject constructor(val dbConnector: DBConnector) {
+class UserRepository @Inject constructor(dbConnector: DBConnector) {
 
     val session = dbConnector.connect()
 

@@ -1,7 +1,6 @@
 package user
 
 import com.google.inject.Inject
-import dbUtils.CassandraConnector
 import java.time.Instant
 import java.util.*
 import javax.ws.rs.GET
@@ -22,9 +21,6 @@ class UserResouce @Inject constructor(val service: UserService) {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     fun get(): List<String> {
-        val dbUtils = CassandraConnector()
-        val session = dbUtils.connect()
-
        return service.getAll()
     }
 
@@ -37,10 +33,8 @@ class UserResouce @Inject constructor(val service: UserService) {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     fun create() {
-        val dbUtils = CassandraConnector()
-        val session = dbUtils.connect()
         val user = User(UUID.randomUUID(), "TestUserName", "123456", 32, Instant.now())
-        UserRepository(session).save(user)
+        service.create(user)
     }
 //
 //    @PUT @Path("{username}")

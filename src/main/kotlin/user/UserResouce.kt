@@ -1,7 +1,7 @@
 package user
 
-import CassandraConnector
 import com.google.inject.Inject
+import dbUtils.CassandraConnector
 import java.time.Instant
 import java.util.*
 import javax.ws.rs.GET

@@ -11,7 +11,6 @@ import javax.ws.rs.ProcessingException
 import javax.ws.rs.core.UriBuilder
 
 
-
 fun main() {
     val props = Properties()
     props.load(FileInputStream("src/log4j.properties"))

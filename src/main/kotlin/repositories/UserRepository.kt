@@ -1,10 +1,12 @@
 package repositories
 
 import com.datastax.oss.driver.api.core.CqlSession
+import com.datastax.oss.driver.api.core.cql.ResultSet
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder.literal
 import com.datastax.oss.driver.api.querybuilder.insert.RegularInsert
 import user.User
+import java.util.stream.Collectors
 
 
 class UserRepository(val session: CqlSession) {
@@ -28,22 +30,20 @@ class UserRepository(val session: CqlSession) {
 
     }
 
-    fun findAll(): String {
+    fun findAll(): List<String> {
         try {
-            val query = QueryBuilder.selectFrom("testkeyspace", "users").all().toString()
-//            val statement = query.build()
-            val rows = session.execute(query).forEach {
-                val row = it
-                println(row)
-                return it.toString()
-            }
+            val query = QueryBuilder.selectFrom("testkeyspace", "users").all()
+            val statement = query.build()
+            val result: ResultSet = session.execute(statement)
+            session.close()
 
-            println(rows)
-//            for (row in rows) {
-//                println(row).toString()
-//            }
-//            session.close()
-            return query.toString()
+            val rows = result.all().stream().collect(Collectors.toList())
+            val users: MutableList<String> = arrayListOf()
+
+            for (row in rows) {
+                users.add(row.formattedContents)
+            }
+            return users
 
         } catch (e: Exception) {
             e.printStackTrace()

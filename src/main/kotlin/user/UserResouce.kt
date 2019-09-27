@@ -21,7 +21,7 @@ class UserResouce {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    fun get(): String {
+    fun get(): List<String> {
         val dbUtils = CassandraConnector()
         val session = dbUtils.connect()
 

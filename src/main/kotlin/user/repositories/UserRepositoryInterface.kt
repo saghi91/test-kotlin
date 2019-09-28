@@ -1,5 +1,6 @@
-package user
+package user.repositories
 
+import user.User
 import utils.Responses.Response
 
 interface UserRepositoryInterface {

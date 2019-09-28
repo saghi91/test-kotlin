@@ -1,5 +1,5 @@
 import user.User
-import user.UserRepository
+import user.repositories.UserRepository
 import utils.Responses.Response
 
 interface UserServiceInterface {

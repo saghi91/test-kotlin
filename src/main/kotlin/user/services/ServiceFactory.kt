@@ -1,7 +1,7 @@
-package user
+package user.services
 
-import dbUtils.SessionFactory
 import UserServiceInterface
+import user.repositories.RepositoryFactory
 
 class ServiceFactory {
     fun createUserService(): UserServiceInterface {

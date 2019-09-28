@@ -1,7 +1,9 @@
-package user
+package user.services
 
 import UserServiceInterface
 import com.google.inject.Inject
+import user.User
+import user.repositories.UserRepository
 import utils.Responses.Response
 
 class UserService @Inject constructor(override val repository: UserRepository) : UserServiceInterface {

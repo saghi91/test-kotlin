@@ -4,9 +4,10 @@ import UserServiceInterface
 import com.google.inject.Inject
 import user.User
 import user.repositories.UserRepository
+import user.repositories.UserRepositoryInterface
 import utils.Responses.Response
 
-class UserService @Inject constructor(override val repository: UserRepository) : UserServiceInterface {
+class UserService @Inject constructor(private val repository: UserRepositoryInterface) : UserServiceInterface {
     override fun getAll(): List<String> {
         return repository.findAll()
     }

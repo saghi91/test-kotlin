@@ -5,7 +5,7 @@ import dbUtils.SessionFactory
 class RepositoryFactory {
     companion object {
         @JvmStatic
-        fun createUserRepository(): UserRepository {
+        fun createUserRepository(): UserRepositoryInterface {
             return UserRepository(SessionFactory.getSession())
         }
     }

@@ -1,13 +1,15 @@
 package user
 
+import UserServiceInterface
 import com.google.inject.Inject
+import utils.Responses.Response
 
-class UserService @Inject constructor(val repository: UserRepository) {
-    fun getAll(): List<String> {
+class UserService @Inject constructor(override val repository: UserRepository) : UserServiceInterface {
+    override fun getAll(): List<String> {
         return repository.findAll()
     }
 
-    fun create(user: User) {
+    override fun create(user: User): Response {
         return repository.save(user)
     }
 }

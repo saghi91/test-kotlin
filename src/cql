@@ -1,0 +1,2 @@
+create keyspace create keyspace testkeyspace with replication = {'class': 'SimpleStrategy', 'replication_factor': 1, 'datacenter1': 1};
+create table testkeyspace.users (user_id UUID, name text, password text, age int, creation_date timestamp, PRIMARY KEY ((name, password), age));

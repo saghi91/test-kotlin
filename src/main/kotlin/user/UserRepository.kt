@@ -1,20 +1,21 @@
 package user
 
+import utils.HttpStatus
+import com.datastax.oss.driver.api.core.CqlSession
 import com.datastax.oss.driver.api.core.cql.ResultSet
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder.literal
 import com.datastax.oss.driver.api.querybuilder.insert.RegularInsert
 import com.google.inject.Inject
-import dbUtils.DBConnector
+import utils.Responses.HttpResponse
+import utils.Responses.Response
 import java.util.stream.Collectors
 
 
-class UserRepository @Inject constructor(dbConnector: DBConnector) {
-
-    val session = dbConnector.connect()
-
-    fun save(user: User) {
+class UserRepository @Inject constructor(private val session: CqlSession) {
+    fun save(user: User): Response {
         try {
+            session
             val query: RegularInsert = QueryBuilder.insertInto("testkeyspace", "users")
                 .value("user_id", literal((user.user_id)))
                 .value("name", literal(user.name))
@@ -25,6 +26,8 @@ class UserRepository @Inject constructor(dbConnector: DBConnector) {
             session.execute(statement)
 
             session.close()
+
+            return HttpResponse.create(HttpStatus.Ok, "User created successfully!")
         } catch (e: Exception) {
             e.printStackTrace()
             throw Exception(e.message)
@@ -51,6 +54,10 @@ class UserRepository @Inject constructor(dbConnector: DBConnector) {
             e.printStackTrace()
             throw Exception(e.message)
         }
+    }
+
+    fun execute() {
+
     }
 }
 

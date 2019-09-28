@@ -2,11 +2,11 @@ package dbUtils.cassandra
 
 import com.google.inject.AbstractModule
 import com.google.inject.Singleton
-import dbUtils.DBConnector
+import dbUtils.DataConnector
 
 @Singleton
 class CassandraConnectorModule : AbstractModule() {
     override fun configure() {
-        bind(DBConnector::class.java).toProvider(CassandraConnectorProvider::class.java)
+        bind(DataConnector::class.java).toProvider(CassandraConnectorProvider::class.java)
     }
 }

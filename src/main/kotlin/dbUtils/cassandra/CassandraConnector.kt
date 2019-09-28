@@ -1,17 +1,15 @@
 package dbUtils.cassandra
 import com.datastax.oss.driver.api.core.CqlIdentifier
 import com.datastax.oss.driver.api.core.CqlSession
-import dbUtils.DBConnector
+import dbUtils.DataConnector
 import javax.inject.Singleton
 
 @Singleton
-class CassandraConnector(val username: String, val password: String, val keyspace: String): DBConnector {
+class CassandraConnector(private val username: String, private val password: String, private val keyspace: String): DataConnector {
 
     override fun connect(): CqlSession {
-        val session: CqlSession = CqlSession.builder()
+        return CqlSession.builder()
             .withAuthCredentials(username, password)
             .withKeyspace(CqlIdentifier.fromCql(keyspace)).build()
-
-        return session
     }
 }

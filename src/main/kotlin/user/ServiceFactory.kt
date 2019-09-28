@@ -5,12 +5,10 @@ import UserServiceInterface
 
 class ServiceFactory {
     fun createUserService(): UserServiceInterface {
-        val userRepository = createUserRepository()
+        val userRepository = RepositoryFactory.createUserRepository()
 
         return UserService(userRepository)
     }
 
-    private fun createUserRepository(): UserRepository {
-        return UserRepository(SessionFactory.getSession())
-    }
+
 }

@@ -7,15 +7,16 @@ import com.datastax.oss.driver.api.querybuilder.QueryBuilder
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder.literal
 import com.datastax.oss.driver.api.querybuilder.insert.RegularInsert
 import com.google.inject.Inject
+import dbUtils.SessionFactory
 import utils.Responses.HttpResponse
 import utils.Responses.Response
 import java.util.stream.Collectors
 
 
-class UserRepository @Inject constructor(private val session: CqlSession) {
-    fun save(user: User): Response {
+class UserRepository @Inject constructor(private val session: CqlSession) : UserRepositoryInterface{
+
+    override fun save(user: User): Response {
         try {
-            session
             val query: RegularInsert = QueryBuilder.insertInto("testkeyspace", "users")
                 .value("user_id", literal((user.user_id)))
                 .value("name", literal(user.name))
@@ -35,7 +36,7 @@ class UserRepository @Inject constructor(private val session: CqlSession) {
 
     }
 
-    fun findAll(): List<String> {
+    override fun findAll(): List<String> {
         try {
             val query = QueryBuilder.selectFrom("testkeyspace", "users").all()
             val statement = query.build()

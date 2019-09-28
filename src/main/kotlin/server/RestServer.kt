@@ -4,7 +4,6 @@ import org.apache.log4j.PropertyConfigurator
 import org.glassfish.grizzly.http.server.HttpServer
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory
 import org.glassfish.jersey.server.ResourceConfig
-import user.ServiceFactory
 import user.UserResource
 import java.io.FileInputStream
 import java.util.*
@@ -33,8 +32,7 @@ fun main() {
 
 private fun createConfiguration(): ResourceConfig {
     val config = ResourceConfig()
-    val userResource = UserResource(ServiceFactory().createUserService())
-    config.registerInstances(userResource)
+    config.register(UserResource::class.java)
 
     return config
 }

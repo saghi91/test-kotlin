@@ -1,8 +1,5 @@
 package user
 
-import UserServiceInterface
-import com.google.inject.Inject
-import dbUtils.cassandra.CassandraConnector
 import utils.Responses.Response
 import java.time.Instant
 import java.util.*
@@ -10,7 +7,9 @@ import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 
 @Path("users")
-class UserResource @Inject constructor(private val userService: UserServiceInterface) {
+class UserResource {
+    private val userService = ServiceFactory().createUserService()
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     fun get(): List<String> {

@@ -12,6 +12,10 @@ services:
       - CASSANDRA_SEEDS=cassandra
       - CASSANDRA_PASSWORD_SEEDER=yes
       - CASSANDRA_PASSWORD=cassandra
+  solr:
+    image: 'solr:latest'
+    ports:
+      - '8983:8983'
 volumes:
   cassandra_data:
     driver: local

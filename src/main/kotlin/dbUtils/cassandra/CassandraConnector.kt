@@ -5,7 +5,8 @@ import dbUtils.DataConnector
 import javax.inject.Singleton
 
 @Singleton
-class CassandraConnector(private val username: String, private val password: String, private val keyspace: String): DataConnector {
+class CassandraConnector(private val username: String, private val password: String, private val keyspace: String):
+    DataConnector<CqlSession> {
 
     override fun connect(): CqlSession {
         return CqlSession.builder()

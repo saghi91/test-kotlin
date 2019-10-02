@@ -6,7 +6,7 @@ class RepositoryFactory {
     companion object {
         @JvmStatic
         fun createUserRepository(): UserRepositoryInterface {
-            return UserRepository(SessionFactory.getSession())
+            return UserCassandraRepository(SessionFactory.getSession())
         }
     }
 }

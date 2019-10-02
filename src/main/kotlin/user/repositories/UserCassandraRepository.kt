@@ -1,6 +1,5 @@
 package user.repositories
 
-import utils.HttpStatus
 import com.datastax.oss.driver.api.core.CqlSession
 import com.datastax.oss.driver.api.core.cql.ResultSet
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder
@@ -8,12 +7,13 @@ import com.datastax.oss.driver.api.querybuilder.QueryBuilder.literal
 import com.datastax.oss.driver.api.querybuilder.insert.RegularInsert
 import com.google.inject.Inject
 import user.User
+import utils.HttpStatus
 import utils.Responses.HttpResponse
 import utils.Responses.Response
 import java.util.stream.Collectors
 
 
-class UserRepository @Inject constructor(private val session: CqlSession) : UserRepositoryInterface {
+class UserCassandraRepository @Inject constructor(private val session: CqlSession) : UserRepositoryInterface {
 
     override fun save(user: User): Response {
         try {

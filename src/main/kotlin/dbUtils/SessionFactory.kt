@@ -1,9 +1,7 @@
 package dbUtils
 
 import com.datastax.oss.driver.api.core.CqlSession
-import com.google.inject.Guice
 import dbUtils.cassandra.CassandraConnector
-import dbUtils.cassandra.CassandraConnectorModule
 
 class SessionFactory {
     companion object {
@@ -14,8 +12,9 @@ class SessionFactory {
             if (session != null) {
                 return session
             }
-            val injector = Guice.createInjector(CassandraConnectorModule())
-            val connector = injector.getInstance(DataConnector::class.java)
+//            val injector = Guice.createInjector(CassandraConnectorModule())
+//            val connector = injector.getInstance(DataConnector::class.java)
+            val connector = CassandraConnector("cassandra", "cassandra", "testkeyspace")
 
             return connector.connect()
         }

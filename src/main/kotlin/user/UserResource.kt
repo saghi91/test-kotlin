@@ -1,5 +1,7 @@
 package user
 
+import dbUtils.solr.SolrClient
+import user.repositories.UserSolrRepository
 import user.services.ServiceFactory
 import utils.Responses.Response
 import java.time.Instant
@@ -15,6 +17,14 @@ class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     fun get(): List<String> {
         return userService.getAll()
+    }
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("solr-data")
+    fun getSolrData(): String {
+        val solrClient = SolrClient().connect()
+        return UserSolrRepository(solrClient).create()
     }
 
     @POST

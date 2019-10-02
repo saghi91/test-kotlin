@@ -3,7 +3,6 @@ package user.services
 import UserServiceInterface
 import com.google.inject.Inject
 import user.User
-import user.repositories.UserRepository
 import user.repositories.UserRepositoryInterface
 import utils.Responses.Response
 
